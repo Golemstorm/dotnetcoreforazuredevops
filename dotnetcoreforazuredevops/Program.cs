@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
+using log4net;
 namespace dotnetcoreforazuredevops
 {
     public class Program
@@ -21,6 +21,12 @@ namespace dotnetcoreforazuredevops
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+                .ConfigureLogging((contxt,loggingBuilder)=> {
+                    loggingBuilder.AddFilter("System", LogLevel.Warning);
+                    loggingBuilder.AddFilter("Microsoft", LogLevel.Warning);
+                })
+            ;
+             
     }
 }
